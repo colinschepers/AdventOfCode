@@ -33,7 +33,7 @@ def solve(vent_lines: Sequence[Line], allow_diagonal: bool = True):
     return sum(cnt > 1 for cnt in vent_points.values())
 
 
-data = get_input(5)
+data = get_input(day=5)
 data = [
     tuple(Coordinate(int(m[1]), int(m[2])) for m in re.finditer('(\d+),(\d+)', line))
     for line in data

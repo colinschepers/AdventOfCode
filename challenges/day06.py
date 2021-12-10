@@ -3,9 +3,6 @@ from typing import Sequence
 
 from utils import get_input
 
-data = get_input(6)
-fishes = list(map(int, data[0].split(',')))
-
 
 def get_next_fishes(fishes: Sequence[int]):
     fishes += [9] * fishes.count(0)
@@ -24,6 +21,9 @@ def get_offspring_count(day: int, max_day: int):
         count += 1 + get_offspring_count(d + 9, max_day)
     return count
 
+
+data = get_input(day=6)
+fishes = list(map(int, data[0].split(',')))
 
 print(len(get_fishes(fishes, 80)))
 print(sum(1 + get_offspring_count(fish, 256) for fish in fishes))

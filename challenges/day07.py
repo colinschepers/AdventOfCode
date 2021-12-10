@@ -38,7 +38,7 @@ def binary_search(seq: Sequence):
     return seq[mid]
 
 
-data = get_input(7)
+data = get_input(day=7)
 crabs = sorted(list(map(int, data[0].split(','))))
 
 costs = LazyList(partial(get_fuel_cost, fuel_metric_constant, pos) for pos in range(crabs[0], crabs[-1] + 1))
