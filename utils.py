@@ -1,4 +1,7 @@
+import contextlib
 import os
+from functools import lru_cache
+from io import StringIO
 from itertools import groupby
 from typing import Iterable, Tuple, Any, Callable, Sequence, TypeVar
 
@@ -29,6 +32,18 @@ def submit_answer(day: int, level: int, answer: int) -> str:
         cookies={"session": SESSION_COOKIE},
         data={"level": level, "answer": answer}
     ).text
+
+
+@lru_cache()
+def get_solutions(day: int) -> Sequence[int]:
+    f = StringIO()
+    with contextlib.redirect_stdout(f):
+        __import__(f"challenges.day{day:02d}")
+    return list(map(int, (line for line in f.getvalue().split('\n') if line.isdigit())))
+
+
+def get_solution(day: int, part: int) -> int:
+    return get_solutions(day)[part - 1]
 
 
 def split_lines(sequence: Sequence[str]) -> Sequence[Sequence[str]]:
