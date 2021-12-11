@@ -1,8 +1,10 @@
 import os
-from collections import Sequence
 from itertools import groupby
+from typing import Iterable, Tuple, Any, Callable, Sequence, TypeVar
 
 import requests_cache
+
+T = TypeVar('T')
 
 SESSION_COOKIE = os.environ["SESSION_COOKIE"]
 session = requests_cache.CachedSession('cache')
@@ -31,3 +33,23 @@ def submit_answer(day: int, level: int, answer: int) -> str:
 
 def split_lines(sequence: Sequence[str]) -> Sequence[Sequence[str]]:
     return [list(group) for key, group in groupby(sequence, key=bool) if key]
+
+
+def get_neighbors(array: Sequence[Sequence[Any]], row: int, col: int, allow_diagonal: bool = False) \
+        -> Iterable[Tuple[int, int]]:
+    candidates = (
+        (row - 1, col - 1), (row - 1, col), (row - 1, col + 1),
+        (row, col - 1), (row, col + 1),
+        (row + 1, col - 1), (row + 1, col), (row + 1, col + 1)
+    ) if allow_diagonal else (
+        (row - 1, col), (row, col - 1), (row, col + 1), (row + 1, col)
+    )
+    for r, c in candidates:
+        if 0 <= r < len(array) and 0 <= c < len(array[r]):
+            yield r, c
+
+
+def iter_2d_array(array: Sequence[Sequence[T]], condition: Callable[[T], bool] = None) \
+        -> Iterable[Tuple[int, int]]:
+    return ((row, col) for row in range(len(array)) for col in range(len(array[row]))
+            if condition is None or condition(array[row][col]))
