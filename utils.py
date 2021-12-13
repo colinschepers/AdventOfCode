@@ -34,16 +34,11 @@ def submit_answer(day: int, level: int, answer: int) -> str:
     ).text
 
 
-@lru_cache()
-def get_solutions(day: int) -> Sequence[int]:
+def get_solution(day: int) -> Sequence[str]:
     f = StringIO()
     with contextlib.redirect_stdout(f):
         __import__(f"challenges.day{day:02d}")
-    return list(map(int, (line for line in f.getvalue().split('\n') if line.isdigit())))
-
-
-def get_solution(day: int, part: int) -> int:
-    return get_solutions(day)[part - 1]
+    return list(line for line in f.getvalue().split('\n') if line)
 
 
 def split_lines(sequence: Sequence[str]) -> Sequence[Sequence[str]]:
