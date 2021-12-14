@@ -1,6 +1,6 @@
 from typing import Tuple, Set
 
-from utils import get_input, get_input_from_file, split_lines
+from utils import get_input, split_lines
 
 Coordinate = Tuple[int, int]
 

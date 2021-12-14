@@ -17,10 +17,12 @@ solutions = {
     10: ['26397', '288957'],
     11: ['1656', '195'],
     12: ['10', '36'],
-    13: ['17', '#####', '#...#', '#...#', '#...#', '#####']
+    13: ['17', '#####', '#...#', '#...#', '#...#', '#####'],
+    14: ['1588', '2188189693529']
 }
 
 test_data = ((day, expected) for day, expected in solutions.items())
+
 
 @pytest.mark.parametrize("day, expected", test_data)
 def test_day(day: int, expected: Sequence[str]):
