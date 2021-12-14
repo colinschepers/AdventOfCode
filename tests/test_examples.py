@@ -1,8 +1,10 @@
 from typing import Sequence
+from unittest import mock
 
 import pytest
 
-from utils import get_solution
+from utils import get_solution, get_input_from_file
+
 
 solutions = {
     1: ['7', '5'],
@@ -24,6 +26,11 @@ solutions = {
 test_data = ((day, expected) for day, expected in solutions.items())
 
 
+def get_input_example(day):
+    return get_input_from_file(f"tests/examples/day{day:02d}.txt")
+
+
 @pytest.mark.parametrize("day, expected", test_data)
-def test_day(day: int, expected: Sequence[str]):
-    assert get_solution(day) == list(expected)
+def test_example_for_day(day: int, expected: Sequence[str]):
+    with mock.patch('utils.get_input', get_input_example):
+        assert get_solution(day) == list(expected)

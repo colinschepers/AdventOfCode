@@ -1,6 +1,6 @@
 import contextlib
 import os
-from functools import lru_cache
+from importlib import reload
 from io import StringIO
 from itertools import groupby
 from typing import Iterable, Tuple, Any, Callable, Sequence, TypeVar
@@ -37,7 +37,12 @@ def submit_answer(day: int, level: int, answer: int) -> str:
 def get_solution(day: int) -> Sequence[str]:
     f = StringIO()
     with contextlib.redirect_stdout(f):
-        __import__(f"challenges.day{day:02d}")
+        module = __import__(f"challenges")
+        file_name = f"day{day:02d}"
+        if file_name not in module.__dict__:
+            __import__(f"challenges.{file_name}")
+        else:
+            reload(module.__dict__[file_name])
     return list(line for line in f.getvalue().split('\n') if line)
 
 
