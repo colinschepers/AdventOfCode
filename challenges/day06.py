@@ -1,17 +1,6 @@
 from functools import lru_cache
-from typing import Sequence
 
 from utils import get_input
-
-
-def get_next_fishes(fishes: Sequence[int]):
-    fishes += [9] * fishes.count(0)
-    return [fish - 1 if fish > 0 else 6 for fish in fishes]
-
-
-def get_fishes(fishes: Sequence[int], days_left: int):
-    return fishes if days_left == 0 else \
-        get_fishes(get_next_fishes(fishes), days_left - 1)
 
 
 @lru_cache()
@@ -25,5 +14,5 @@ def get_offspring_count(day: int, max_day: int):
 data = get_input(day=6)
 fishes = list(map(int, data[0].split(',')))
 
-print(len(get_fishes(fishes, 80)))
+print(sum(1 + get_offspring_count(fish, 80) for fish in fishes))
 print(sum(1 + get_offspring_count(fish, 256) for fish in fishes))
