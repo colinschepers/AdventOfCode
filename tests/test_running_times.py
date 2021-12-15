@@ -20,4 +20,4 @@ def test_running_time_for_day(day: int):
         start = datetime.now()
         _ = get_solution(day)
         elapsed = datetime.now() - start
-    assert elapsed < timedelta(seconds=3)
+    assert elapsed < timedelta(seconds=1)

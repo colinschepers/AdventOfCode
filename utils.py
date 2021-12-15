@@ -70,3 +70,7 @@ def iter_grid(grid: Grid, condition: Callable[[T], bool] = None) \
         -> Iterable[Coordinate]:
     return ((row, col) for row in range(len(grid)) for col in range(len(grid[row]))
             if condition is None or condition(grid[row][col]))
+
+
+def manhattan(a: Coordinate, b: Coordinate):
+    return abs(a[0] - b[0]) + abs(a[1] - b[1])
