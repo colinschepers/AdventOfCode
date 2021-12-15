@@ -1,8 +1,6 @@
-from typing import Tuple, Set
+from typing import Set
 
-from utils import get_input, iter_2d_array, get_neighbors
-
-Coordinate = Tuple[int, int]
+from utils import get_input, iter_grid, get_neighbors, Coordinate
 
 
 def flash(row: int, col: int, flashed: Set[Coordinate]):
@@ -16,11 +14,11 @@ def flash(row: int, col: int, flashed: Set[Coordinate]):
 
 def step() -> int:
     flashed = set()
-    for row, col in iter_2d_array(octopuses):
+    for row, col in iter_grid(octopuses):
         octopuses[row][col] += 1
-    for row, col in iter_2d_array(octopuses, lambda x: x > 9):
+    for row, col in iter_grid(octopuses, lambda x: x > 9):
         flash(row, col, flashed)
-    for row, col in iter_2d_array(octopuses, lambda x: x > 9):
+    for row, col in iter_grid(octopuses, lambda x: x > 9):
         octopuses[row][col] = 0
     return len(flashed)
 

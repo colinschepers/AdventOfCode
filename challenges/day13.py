@@ -1,8 +1,6 @@
-from typing import Tuple, Set
+from typing import Set
 
-from utils import get_input, split_lines
-
-Coordinate = Tuple[int, int]
+from utils import get_input, split_lines, Coordinate
 
 
 def fold(coordinates: Set[Coordinate], value: int, is_vertical: bool):

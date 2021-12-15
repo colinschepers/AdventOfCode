@@ -3,11 +3,14 @@ import os
 from importlib import reload
 from io import StringIO
 from itertools import groupby
-from typing import Iterable, Tuple, Any, Callable, Sequence, TypeVar
+from typing import Iterable, Tuple, Callable, Sequence, TypeVar
 
 import requests_cache
 
 T = TypeVar('T')
+Coordinate = Tuple[int, int]
+Line = Tuple[Coordinate, Coordinate]
+Grid = Sequence[Sequence[T]]
 
 SESSION_COOKIE = os.environ["SESSION_COOKIE"]
 session = requests_cache.CachedSession('cache')
@@ -50,21 +53,20 @@ def split_lines(sequence: Sequence[str]) -> Sequence[Sequence[str]]:
     return [list(group) for key, group in groupby(sequence, key=bool) if key]
 
 
-def get_neighbors(array: Sequence[Sequence[Any]], row: int, col: int, allow_diagonal: bool = False) \
-        -> Iterable[Tuple[int, int]]:
+def get_neighbors(grid: Grid, row: int, col: int, allow_diagonal: bool = False) \
+        -> Iterable[Coordinate]:
     candidates = (
-        (row - 1, col - 1), (row - 1, col), (row - 1, col + 1),
-        (row, col - 1), (row, col + 1),
-        (row + 1, col - 1), (row + 1, col), (row + 1, col + 1)
+        (row + 1, col + 1), (row + 1, col), (row, col + 1), (row + 1, col - 1), (row - 1, col + 1),
+        (row, col - 1), (row - 1, col), (row - 1, col - 1)
     ) if allow_diagonal else (
-        (row - 1, col), (row, col - 1), (row, col + 1), (row + 1, col)
+        (row + 1, col), (row, col + 1), (row - 1, col), (row, col - 1)
     )
     for r, c in candidates:
-        if 0 <= r < len(array) and 0 <= c < len(array[r]):
+        if 0 <= r < len(grid) and 0 <= c < len(grid[r]):
             yield r, c
 
 
-def iter_2d_array(array: Sequence[Sequence[T]], condition: Callable[[T], bool] = None) \
-        -> Iterable[Tuple[int, int]]:
-    return ((row, col) for row in range(len(array)) for col in range(len(array[row]))
-            if condition is None or condition(array[row][col]))
+def iter_grid(grid: Grid, condition: Callable[[T], bool] = None) \
+        -> Iterable[Coordinate]:
+    return ((row, col) for row in range(len(grid)) for col in range(len(grid[row]))
+            if condition is None or condition(grid[row][col]))

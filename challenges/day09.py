@@ -1,15 +1,13 @@
 from functools import lru_cache
 from math import prod
-from typing import Sequence, Set, Tuple
+from typing import Sequence, Set
 
-from utils import get_input, iter_2d_array, get_neighbors
-
-Coordinate = Tuple[int, int]
+from utils import get_input, iter_grid, get_neighbors, Coordinate
 
 
 @lru_cache
 def get_low_points() -> Sequence[Coordinate]:
-    return [(row, col) for row, col in iter_2d_array(grid)
+    return [(row, col) for row, col in iter_grid(grid)
             if all(grid[row][col] < grid[r][c] for r, c, in get_neighbors(grid, row, col))]
 
 
