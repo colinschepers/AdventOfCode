@@ -1,9 +1,9 @@
 from enum import Enum
 from itertools import islice
 from math import prod
-from typing import Iterable, Sequence, List, Tuple
+from typing import Iterable, Tuple, Iterator
 
-from utils import get_input, get_input_from_file
+from utils import get_input
 
 
 class PacketTypes(Enum):
@@ -17,7 +17,7 @@ class PacketTypes(Enum):
     EQUAL = 7
 
 
-def evaluate(packet_type: PacketTypes, values: Iterable[int]):
+def evaluate(packet_type: PacketTypes, values: Iterable[int]) -> int:
     if packet_type == PacketTypes.SUM:
         return sum(values)
     elif packet_type == PacketTypes.PRODUCT:
@@ -39,7 +39,7 @@ def split(msg: str, idx: int) -> Tuple[int, str]:
     return int(msg[:idx], 2), msg[idx:]
 
 
-def parse(msg: str):
+def parse(msg: str) -> Iterator[Tuple[int, int, str]]:
     if not msg or int(msg, 2) == 0:
         return
 
@@ -75,6 +75,6 @@ def parse(msg: str):
 data = get_input(day=16)
 binary = ''.join(f"{int(x):04b}" if x.isdigit() else f"{ord(x) - 55:b}" for x in data[0])
 
-result, version_sum, _ = next(parse(binary))
+result, version_sum, remainder = next(parse(binary))
 print(version_sum)
 print(result)
