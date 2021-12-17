@@ -21,7 +21,7 @@ def get_score(line: str) -> Tuple[int, bool]:
                   range(len(expected)), 0), False
 
 
-data = get_input(day=10)
+data = get_input(year=2021, day=10)
 
 scores = list(get_score(line) for line in data)
 print(sum(score for score, is_error in scores if is_error))

@@ -20,7 +20,7 @@ def count_paths(current: str, small_visited: Set[str], may_visit_twice: bool) ->
     return cnt
 
 
-data = get_input(day=12)
+data = get_input(year=2021, day=12)
 
 connections = defaultdict(list)
 for line in data:

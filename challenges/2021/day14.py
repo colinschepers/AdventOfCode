@@ -21,7 +21,7 @@ def solve(pairs: Mapping[str, int], pair_insertions: Mapping[str, str], step_cou
     return ceil(max(counts.values()) / 2) - ceil(min(counts.values()) / 2)
 
 
-lines = get_input(day=14)
+lines = get_input(year=2021, day=14)
 pairs = Counter(lines[0][i:i + 2] for i in range(len(lines[0]) - 1))
 pair_insertions = {line[:2]: line[-1] for line in lines[2:]}
 

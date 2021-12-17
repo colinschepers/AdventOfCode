@@ -21,7 +21,7 @@ def to_ascii(coordinates: Set[Coordinate]):
     return '\n'.join(''.join(row) for row in grid)
 
 
-coordinates, folds = split_lines(get_input(day=13))
+coordinates, folds = split_lines(get_input(year=2021, day=13))
 coordinates = {tuple(int(val) for val in line.split(',')) for line in coordinates}
 folds = [line.split('=') for line in folds]
 folds = [(int(right), left[-1] == 'x') for left, right in folds]

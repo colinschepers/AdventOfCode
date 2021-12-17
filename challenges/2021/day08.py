@@ -19,7 +19,7 @@ def solve(inputs: Sequence[Set], outputs: Sequence[Set]):
     return int(''.join(lookup[''.join(sorted(output))] for output in outputs))
 
 
-data = get_input(day=8)
+data = get_input(year=2021, day=8)
 data = [(list(map(set, left.split())), list(map(set, right.split())))
         for (left, right) in (line.split(' | ') for line in data)]
 

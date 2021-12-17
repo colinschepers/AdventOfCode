@@ -23,7 +23,7 @@ def step() -> int:
     return len(flashed)
 
 
-data = get_input(day=11)
+data = get_input(year=2021, day=11)
 
 octopuses = [[int(char) for char in line] for line in data]
 print(sum(step() for _ in range(100)))

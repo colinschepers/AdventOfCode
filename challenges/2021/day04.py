@@ -62,5 +62,5 @@ def solve_part_2(data: Sequence[str]):
     raise ValueError()
 
 
-print(solve_part_1(get_input(day=4)))
-print(solve_part_2(get_input(day=4)))
+print(solve_part_1(get_input(year=2021, day=4)))
+print(solve_part_2(get_input(year=2021, day=4)))

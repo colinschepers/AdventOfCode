@@ -19,7 +19,7 @@ def get_trajectories():
                 yield trajectory
 
 
-target_x_min, target_x_max, target_y_min, target_y_max = map(int, re.findall(r"-?\d+", get_input(day=17)[0]))
+target_x_min, target_x_max, target_y_min, target_y_max = map(int, re.findall(r"-?\d+", get_input(year=2021, day=17)[0]))
 trajectories = list(get_trajectories())
 
 print(max(y for trajectory in trajectories for x, y in trajectory))

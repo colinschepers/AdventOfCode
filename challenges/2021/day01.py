@@ -1,6 +1,6 @@
 from utils import get_input
 
-data = list(map(int, get_input(day=1)))
+data = list(map(int, get_input(year=2021, day=1)))
 
 answer = sum(data[i] < data[i + 1] for i in range(len(data) - 1))
 print(answer)

@@ -72,7 +72,7 @@ def parse(msg: str) -> Iterator[Tuple[int, int, str]]:
     yield from parse(msg)
 
 
-data = get_input(day=16)
+data = get_input(year=2021, day=16)
 binary = ''.join(f"{int(x):04b}" if x.isdigit() else f"{ord(x) - 55:b}" for x in data[0])
 
 result, version_sum, remainder = next(parse(binary))

@@ -11,7 +11,7 @@ def get_offspring_count(day: int, max_day: int):
     return count
 
 
-data = get_input(day=6)
+data = get_input(year=2021, day=6)
 fishes = list(map(int, data[0].split(',')))
 
 print(sum(1 + get_offspring_count(fish, 80) for fish in fishes))

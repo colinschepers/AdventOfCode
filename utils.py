@@ -1,6 +1,6 @@
 import contextlib
 import os
-from importlib import reload
+from importlib import import_module, reload
 from io import StringIO
 from itertools import groupby
 from typing import Iterable, Tuple, Callable, Sequence, TypeVar
@@ -16,15 +16,15 @@ SESSION_COOKIE = os.environ["SESSION_COOKIE"]
 session = requests_cache.CachedSession('cache')
 
 
-def get_input(day: int) -> Sequence[str]:
+def get_input(year: int, day: int) -> Sequence[str]:
     response = session.get(
-        url=f"https://adventofcode.com/2021/day/{day}/input",
+        url=f"https://adventofcode.com/{year}/day/{day}/input",
         cookies={"session": SESSION_COOKIE}
     ).text.strip()
     return [line for line in response.split('\n')]
 
 
-def get_input_from_file(file_name: str) -> Sequence[str]:
+def read_file(file_name: str) -> Sequence[str]:
     with open(file_name) as reader:
         return [line for line in reader.read().split('\n')]
 
@@ -37,13 +37,13 @@ def submit_answer(day: int, level: int, answer: int) -> str:
     ).text
 
 
-def get_solution(day: int) -> Sequence[str]:
+def get_solution(year: int, day: int) -> Sequence[str]:
     f = StringIO()
     with contextlib.redirect_stdout(f):
-        module = __import__(f"challenges")
+        module = import_module(f"challenges.{year}")
         file_name = f"day{day:02d}"
         if file_name not in module.__dict__:
-            __import__(f"challenges.{file_name}")
+            import_module(f"challenges.{year}.{file_name}")
         else:
             reload(module.__dict__[file_name])
     return list(line for line in f.getvalue().split('\n') if line)

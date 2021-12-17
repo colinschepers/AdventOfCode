@@ -29,7 +29,7 @@ def get_rating(report: Sequence[str], maximize: bool = True):
     raise ValueError()
 
 
-data = get_input(day=3)
+data = get_input(year=2021, day=3)
 
 most_common_bits = get_most_common_bits(data)
 gamma = to_decimal(most_common_bits)

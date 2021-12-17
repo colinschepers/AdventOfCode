@@ -20,7 +20,7 @@ def get_basin_sizes() -> Sequence[int]:
     return [_get_basin_size(row, col, set()) for row, col in get_low_points()]
 
 
-data = get_input(day=9)
+data = get_input(year=2021, day=9)
 grid = [[int(char) for char in line] for line in data]
 
 print(sum(grid[row][col] + 1 for row, col in get_low_points()))

@@ -48,7 +48,7 @@ def a_star(grid: Grid):
     return float('inf')
 
 
-grid = [[int(x) for x in line] for line in get_input(day=15)]
+grid = [[int(x) for x in line] for line in get_input(year=2021, day=15)]
 
 print(a_star(grid))
 print(a_star(expand_grid(grid, 5)))

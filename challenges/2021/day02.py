@@ -10,7 +10,7 @@ class Submarine:
     aim: int = 0
 
 
-data = [(command, int(value)) for command, value in map(str.split, get_input(day=2))]
+data = [(command, int(value)) for command, value in map(str.split, get_input(year=2021, day=2))]
 
 sub_marine = Submarine()
 for command, value in data:

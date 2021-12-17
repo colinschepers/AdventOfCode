@@ -6,18 +6,16 @@ import pytest
 
 from utils import get_solution, get_input
 
-days = [int(path.stem[-2:]) for path in Path("challenges").glob("day*.py")]
-inputs = {day: get_input(day) for day in days}
+challenges = [(int(folder.name), int(file.stem[-2:]))
+              for folder in Path("challenges").glob("**/") for file in folder.glob("day*.py")]
+inputs = {(year, day): get_input(year, day) for year, day in challenges}
 
 
-def get_input_from_cache(day):
-    return inputs[day]
-
-
-@pytest.mark.parametrize("day", days)
-def test_running_time_for_day(day: int):
-    with mock.patch('utils.get_input', get_input_from_cache):
+@pytest.mark.parametrize("year, day", challenges)
+def test_running_time(year: int, day: int):
+    with mock.patch('utils.get_input', lambda year, day: inputs[(year, day)]):
         start = datetime.now()
-        _ = get_solution(day)
+        solution = get_solution(year, day)
         elapsed = datetime.now() - start
-    assert elapsed < timedelta(seconds=3)
+    assert solution
+    assert elapsed < timedelta(seconds=10)
