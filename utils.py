@@ -1,8 +1,10 @@
 import contextlib
 import os
+import re
 from importlib import import_module, reload
 from io import StringIO
 from itertools import groupby
+from pathlib import Path
 from typing import Iterable, Tuple, Callable, Sequence, TypeVar
 
 import requests_cache
@@ -49,11 +51,19 @@ def get_solution(year: int, day: int) -> Sequence[str]:
     return list(line for line in f.getvalue().split('\n') if line)
 
 
+def get_years() -> Sequence[int]:
+    return [int(p.name) for p in Path("challenges").iterdir() if re.match(r"\d{4}", p.name)]
+
+
+def get_days(year: int):
+    return [int(re.search(r'\d+', p.stem).group()) for p in Path(f"challenges/{year}").glob("day*.py")]
+
+
 def split_lines(sequence: Sequence[str]) -> Sequence[Sequence[str]]:
     return [list(group) for key, group in groupby(sequence, key=bool) if key]
 
 
-def get_neighbors(grid: Grid, row: int, col: int, allow_diagonal: bool = False) \
+def get_neighbors(row: int, col: int, width: int, height: int, allow_diagonal: bool = False) \
         -> Iterable[Coordinate]:
     candidates = (
         (row + 1, col + 1), (row + 1, col), (row, col + 1), (row + 1, col - 1), (row - 1, col + 1),
@@ -62,7 +72,7 @@ def get_neighbors(grid: Grid, row: int, col: int, allow_diagonal: bool = False) 
         (row + 1, col), (row, col + 1), (row - 1, col), (row, col - 1)
     )
     for r, c in candidates:
-        if 0 <= r < len(grid) and 0 <= c < len(grid[r]):
+        if 0 <= r < height and 0 <= c < width:
             yield r, c
 
 

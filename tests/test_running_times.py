@@ -1,13 +1,11 @@
 from datetime import datetime, timedelta
-from pathlib import Path
 from unittest import mock
 
 import pytest
 
-from utils import get_solution, get_input
+from utils import get_solution, get_input, get_years, get_days
 
-challenges = [(int(folder.name), int(file.stem[-2:]))
-              for folder in Path("challenges").glob("**/") for file in folder.glob("day*.py")]
+challenges = [(year, day) for year in get_years() for day in get_days(year)]
 inputs = {(year, day): get_input(year, day) for year, day in challenges}
 
 

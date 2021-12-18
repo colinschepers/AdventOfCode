@@ -1,5 +1,13 @@
-from pathlib import Path
+import argparse
 
-challenge_files = Path("challenges/2021").glob("day*.py")
-last_challenge_file = next(iter(sorted(challenge_files, reverse=True)))
-__import__(f"challenges.2021.{last_challenge_file.stem}")
+from utils import get_solution, get_years, get_days
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-y', '--year', type=int)
+    parser.add_argument('-day', '--day', type=int)
+    args = parser.parse_args()
+
+    year = args.year or max(get_years())
+    day = args.day or max(get_days(year))
+    print("\n".join(get_solution(year, day)))
