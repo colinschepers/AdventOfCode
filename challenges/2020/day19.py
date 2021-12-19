@@ -1,21 +1,16 @@
+import re
 
-r = open('./data/day19.txt').read()
-input = r.split('\n\n')
+from utils import get_input, split_lines
 
-#Part 1
-rules = {}
-for text in input[0].splitlines():
-    data = text.split(': ')
-    id, content = data[0], [sub.strip().split(' ') for sub in data[1].split('|')]
-    rules[id] = content
+rules, messages = split_lines(get_input(year=2020, day=19))
+rules = {line.split(": ")[0]: [sub.split(' ') for sub in line.split(": ")[1].split(' | ')] for line in rules}
 
-messages = input[1].splitlines()
 
-def solve(id, msg, i):
+def solve(id: str, msg: str, i: int):
     rule = rules[id]
     if rule[0][0][0] == '"':
         return {i + 1} if i < len(msg) and rule[0][0][1] == msg[i] else set()
-    
+
     tail = set()
     for subrule in rule:
         tmp1 = {i}
@@ -27,11 +22,9 @@ def solve(id, msg, i):
         tail = tail | tmp1
     return tail
 
-results = [len(m) in solve('0', m, 0) for m in messages]
-print(sum(x for x in results))
 
+print(sum(len(m) in solve('0', m, 0) for m in messages))
 
-rules['8'] = [['42'],['42','8']]
-rules['11'] = [['42','31'],['42','11','31']]
-results = [len(m) in solve('0', m, 0) for m in messages]
-print(sum(x for x in results))
+rules['8'] = [['42'], ['42', '8']]
+rules['11'] = [['42', '31'], ['42', '11', '31']]
+print(sum(len(m) in solve('0', m, 0) for m in messages))

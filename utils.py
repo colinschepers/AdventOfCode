@@ -5,14 +5,14 @@ from importlib import import_module, reload
 from io import StringIO
 from itertools import groupby
 from pathlib import Path
-from typing import Iterable, Tuple, Callable, Sequence, TypeVar
+from typing import Iterable, Tuple, Callable, Sequence, TypeVar, List
 
 import requests_cache
 
 T = TypeVar('T')
 Coordinate = Tuple[int, int]
 Line = Tuple[Coordinate, Coordinate]
-Grid = Sequence[Sequence[T]]
+Grid = List[List[T]]
 
 SESSION_COOKIE = os.environ["SESSION_COOKIE"]
 session = requests_cache.CachedSession('cache')
