@@ -82,5 +82,5 @@ def iter_grid(grid: Grid, condition: Callable[[T], bool] = None) \
             if condition is None or condition(grid[row][col]))
 
 
-def manhattan(a: Coordinate, b: Coordinate):
-    return abs(a[0] - b[0]) + abs(a[1] - b[1])
+def manhattan(a: Tuple, b: Tuple):
+    return sum(abs(x - y) for x, y in zip(a, b))
