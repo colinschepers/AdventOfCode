@@ -4,14 +4,14 @@ from functools import lru_cache
 from utils import get_input
 
 
-@lru_cache
+@lru_cache(maxsize=None)
 def can_contain(bag: str, target: str) -> bool:
     if bag == target:
         return True
     return any(can_contain(bag, target) for _, bag in bags[bag])
 
 
-@lru_cache
+@lru_cache(maxsize=None)
 def count(bag: str) -> int:
     return 1 + sum(cnt * count(b) for cnt, b in bags[bag])
 

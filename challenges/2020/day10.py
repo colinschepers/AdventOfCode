@@ -14,7 +14,7 @@ def get_diffs() -> Mapping[int, int]:
     return diffs
 
 
-@lru_cache
+@lru_cache(maxsize=None)
 def count(i: int) -> int:
     if i == len(data) - 1:
         return 1

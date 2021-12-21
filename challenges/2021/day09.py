@@ -5,7 +5,7 @@ from typing import Sequence, Set
 from utils import get_input, iter_grid, get_neighbors, Coordinate
 
 
-@lru_cache
+@lru_cache(maxsize=None)
 def get_low_points() -> Sequence[Coordinate]:
     return [(row, col) for row, col in iter_grid(grid)
             if all(grid[row][col] < grid[r][c] for r, c, in get_neighbors(row, col, width, height))]

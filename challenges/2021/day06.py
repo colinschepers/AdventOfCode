@@ -3,7 +3,7 @@ from functools import lru_cache
 from utils import get_input
 
 
-@lru_cache()
+@lru_cache(maxsize=None)
 def get_offspring_count(day: int, max_day: int):
     count = 0
     for d in range(day, max_day, 7):
