@@ -1,64 +1,46 @@
-import time
+from typing import Sequence
+
+from utils import get_input
 
 
-cups = [int(x) for x in open('./data/day23.txt').read().strip()]
+def iterate(next_cup: Sequence[int], current: int = 1):
+    for i in range(len(next_cup) - 1):
+        yield current
+        current = next_cup[current]
 
 
-class Cup(object):
-    def __init__(self, val):
-        self.val = val
-        self.prev = None
-        self.next = None
+def simulate(cups: Sequence[int], turns: int):
+    cup_count = len(cups)
+    next_cup = [0] * (cup_count + 1)
+    current = cups[0]
+    for i in range(1, len(cups)):
+        next_cup[current] = cups[i]
+        current = next_cup[current]
+    next_cup[current] = cups[0]
 
-    def __repr__(self):
-        return str(self.val)
+    current = cups[0]
+    for _ in range(turns):
+        first = next_cup[current]
+        second = next_cup[first]
+        third = next_cup[second]
+
+        target = current - 1 if current > 1 else cup_count
+        while target in (first, second, third):
+            target = target - 1 if target > 1 else cup_count
+
+        next_cup[current] = next_cup[third]
+        next_cup[third] = next_cup[target]
+        next_cup[target] = first
+
+        current = next_cup[current]
+
+    return next_cup
 
 
-def iterate(head):
-    yield head
-    curr = head.next
-    while curr != head:
-        yield curr
-        curr = curr.next 
+cups = [int(char) for char in get_input(year=2020, day=23)[0]]
+next_cup = simulate(cups, 100)
+print(''.join(map(str, iterate(next_cup)))[1:])
 
-
-def print_cups(head):
-    print(list(iterate(head)))
-
-
-def simulate(cups, n):
-    max_val = max(cups)
-    cups = [Cup(x) for x in cups]
-    for i, cup in enumerate(cups):
-        cup.prev, cup.next = cups[i-1], cups[(i+1) % max_val]
-    lookup = {c.val: c for c in cups}
-    head = cups[0]
-
-    for _ in range(n):
-        first, second, last = head.next, head.next.next, head.next.next.next
-
-        target_val = head.val - 1 if head.val > 1 else max_val
-        while target_val == first.val or target_val == second.val or target_val == last.val:
-            target_val = target_val - 1 if target_val > 1 else max_val
-
-        head.next = last.next
-        head = head.next
-
-        target = lookup[target_val]
-        last.next = target.next
-        target.next.prev = last
-        target.next = first
-        first.prev = target.next
-
-        # print_cups(head)
-
-    return lookup[1]
-
-start_time = time.time()
-head = simulate(cups, 100)
-print(''.join(str(cup.val) for cup in iterate(head)).strip('1'), f"\t{time.time() - start_time}s")
-
-cups += [x for x in range(max(cups) + 1, 1000000 + 1)]
-start_time = time.time()
-head = simulate(cups, 10000000)
-print(head.next.val * head.next.next.val, f"\t{time.time() - start_time}s")
+cups += [x for x in range(len(cups) + 1, 1000001)]
+next_cup = simulate(cups, 10000000)
+print(next_cup[1] * next_cup[next_cup[1]])

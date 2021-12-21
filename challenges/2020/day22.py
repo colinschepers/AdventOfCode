@@ -1,46 +1,49 @@
+from typing import List, Tuple
 
-inputs = open('./data/day22.txt').read().strip().split('\n\n')
-player1 = [int(x) for x in inputs[0].split('\n')[1:]]
-player2 = [int(x) for x in inputs[1].split('\n')[1:]]
+from utils import split_lines, get_input
 
-def combat(p1, p2):
-    while p1 and p2:
-        if p1[0] > p2[0]:
-            p1 += p1.pop(0), p2.pop(0)
+
+def combat(player1: List[int], player2: List[int]) -> Tuple[List[int], List[int]]:
+    while player1 and player2:
+        if player1[0] > player2[0]:
+            player1 += player1.pop(0), player2.pop(0)
         else:
-            p2 += p2.pop(0), p1.pop(0)
-    return p1 or p2
-
-winning_hand = combat(player1.copy(), player2.copy())
-
-print(sum(c * (i+1) for i, c in enumerate(reversed(winning_hand))))
+            player2 += player2.pop(0), player1.pop(0)
+    return player1, player2
 
 
-def recursive_combat(p1, p2, d = 0):
-    if not p1 or not p2:
-        return p1, p2
+def recursive_combat(player1: List[int], player2: List[int]) -> Tuple[List[int], List[int]]:
+    if not player1 or not player2:
+        return player1, player2
 
     transposition_table = set()
-    while p1 and p2:
-        hash = str(p1) + str(p2)
+    while player1 and player2:
+        hash = (tuple(player1), tuple(player2))
         if hash in transposition_table:
-            return p1 + p2, []
+            return player1 + player2, []
         transposition_table.add(hash)
 
-        c1, c2 = p1.pop(0), p2.pop(0)
-        if len(p1) >= c1 and len(p2) >= c2:
-            _p1, _p2 = recursive_combat(p1[:c1].copy(), p2[:c2].copy())
-            p1_win = bool(_p1)
+        card_p1, card_p2 = player1.pop(0), player2.pop(0)
+        if len(player1) >= card_p1 and len(player2) >= card_p2:
+            p1, p2 = player1[:card_p1], player2[:card_p2]
+            p1_win = max(p1) > max(p2) or recursive_combat(p1, p2)[0]
         else:
-            p1_win = c1 > c2
+            p1_win = card_p1 > card_p2
 
         if p1_win:
-            p1 += c1, c2
+            player1 += card_p1, card_p2
         else:
-            p2 += c2, c1
-    return p1, p2
+            player2 += card_p2, card_p1
+
+    return player1, player2
+
+
+player1, player2 = split_lines(get_input(year=2020, day=22))
+player1 = [int(x) for x in player1[1:]]
+player2 = [int(x) for x in player2[1:]]
+
+p1, p2 = combat(player1.copy(), player2.copy())
+print(sum(c * (i + 1) for i, c in enumerate(reversed(p1 or p2))))
 
 p1, p2 = recursive_combat(player1.copy(), player2.copy())
-
-print(sum(c * (i+1) for i, c in enumerate(reversed(p1 or p2))))
-
+print(sum(c * (i + 1) for i, c in enumerate(reversed(p1 or p2))))

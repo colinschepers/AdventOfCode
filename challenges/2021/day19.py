@@ -14,7 +14,7 @@ class Scanner:
         self.coordinates = coordinates
         self._permutations = list(get_permutations(coordinates))
 
-    def match(self, other: 'Scanner'):
+    def match(self, other: 'Scanner') -> bool:
         for permutation in self._permutations:
             translations = ((x1 - x2, y1 - y2, z1 - z2)
                             for x1, y1, z1 in other.coordinates for x2, y2, z2 in permutation)
@@ -28,15 +28,15 @@ class Scanner:
         return False
 
 
-def rotate(coordinates: Sequence[Coordinate]):
+def rotate(coordinates: Sequence[Coordinate]) -> Sequence[Coordinate]:
     return [(-y, x, z) for x, y, z in coordinates]
 
 
-def flip(coordinates: Sequence[Coordinate]):
+def flip(coordinates: Sequence[Coordinate]) -> Sequence[Coordinate]:
     return [(x, z, -y) for x, y, z in coordinates]
 
 
-def get_permutations(coordinates: Sequence[Coordinate]):
+def get_permutations(coordinates: Sequence[Coordinate]) -> Sequence[Coordinate]:
     for _ in range(2):
         for _ in range(3):
             yield coordinates
