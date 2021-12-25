@@ -41,7 +41,7 @@ def load_boards(lines: Sequence[str]) -> Iterable[Board]:
         yield Board.from_lines(group)
 
 
-def solve_part_1(data: Sequence[str]):
+def solve_part_1(data: Sequence[str]) -> int:
     numbers = list(map(int, data[0].split(',')))
     boards = list(load_boards(data[1:]))
     for number in numbers:
@@ -51,7 +51,7 @@ def solve_part_1(data: Sequence[str]):
     raise ValueError()
 
 
-def solve_part_2(data: Sequence[str]):
+def solve_part_2(data: Sequence[str]) -> int:
     numbers = list(map(int, data[0].split(',')))
     boards = list(load_boards(data[1:]))
     for number in numbers:

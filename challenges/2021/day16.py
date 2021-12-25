@@ -1,7 +1,7 @@
 from enum import Enum
 from itertools import islice
 from math import prod
-from typing import Iterable, Tuple, Iterator
+from typing import Tuple, Iterator
 
 from utils import get_input
 
@@ -17,7 +17,7 @@ class PacketTypes(Enum):
     EQUAL = 7
 
 
-def evaluate(packet_type: PacketTypes, values: Iterable[int]) -> int:
+def evaluate(packet_type: PacketTypes, values: Iterator[int]) -> int:
     if packet_type == PacketTypes.SUM:
         return sum(values)
     elif packet_type == PacketTypes.PRODUCT:

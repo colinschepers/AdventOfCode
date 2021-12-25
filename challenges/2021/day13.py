@@ -3,7 +3,7 @@ from typing import Set
 from utils import get_input, split_lines, Coordinate
 
 
-def fold(coordinates: Set[Coordinate], value: int, is_vertical: bool):
+def fold(coordinates: Set[Coordinate], value: int, is_vertical: bool) -> Set[Coordinate]:
     new_coordinates = set()
     for x, y in list(coordinates):
         if is_vertical and x > value:
@@ -14,7 +14,7 @@ def fold(coordinates: Set[Coordinate], value: int, is_vertical: bool):
     return new_coordinates
 
 
-def to_ascii(coordinates: Set[Coordinate]):
+def to_ascii(coordinates: Set[Coordinate]) -> str:
     width = max(x for x, y in coordinates) + 1
     height = max(y for x, y in coordinates) + 1
     grid = (('#' if (x, y) in coordinates else '.' for x in range(width)) for y in range(height))

@@ -22,11 +22,11 @@ def fuel_metric_increment(x: int, y: int) -> int:
     return dis * (dis + 1) // 2
 
 
-def get_fuel_cost(fuel_metric: Callable[[int, int], int], position: int):
+def get_fuel_cost(fuel_metric: Callable[[int, int], int], position: int) -> int:
     return sum(fuel_metric(crab, position) for crab in crabs)
 
 
-def binary_search(seq: Sequence):
+def binary_search(seq: Sequence) -> int:
     left, right = 0, len(seq) - 1
     mid = int(left + (right - left) / 2)
     while left < mid < right:

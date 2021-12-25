@@ -4,7 +4,6 @@ from typing import Tuple
 
 from utils import get_input
 
-
 CHUNKS = {"(": ")", "[": "]", "{": "}", "<": ">"}
 ERROR_SCORES = {")": 3, "]": 57, "}": 1197, ">": 25137}
 COMPLETION_SCORES = {")": 1, "]": 2, "}": 3, ">": 4}

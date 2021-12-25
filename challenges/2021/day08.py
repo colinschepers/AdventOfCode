@@ -3,7 +3,7 @@ from typing import Sequence, Set
 from utils import get_input
 
 
-def solve(inputs: Sequence[Set], outputs: Sequence[Set]):
+def solve(inputs: Sequence[Set], outputs: Sequence[Set]) -> int:
     digits = dict()
     digits[1] = next(x for x in inputs if len(x) == 2)
     digits[4] = next(x for x in inputs if len(x) == 4)

@@ -4,7 +4,7 @@ from utils import get_input
 
 
 @lru_cache(maxsize=None)
-def get_offspring_count(day: int, max_day: int):
+def get_offspring_count(day: int, max_day: int) -> int:
     count = 0
     for d in range(day, max_day, 7):
         count += 1 + get_offspring_count(d + 9, max_day)

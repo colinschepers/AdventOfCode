@@ -1,16 +1,17 @@
 import math
 import re
+from typing import Iterable, List
 
-from utils import get_input
+from utils import get_input, Coordinate
 
 
-def get_trajectory(x, y, v_x, v_y):
+def get_trajectory(x: int, y: int, v_x: int, v_y: int) -> Iterable[Coordinate]:
     while x <= target_x_max and y >= target_y_min:
         yield x, y
         x, y, v_x, v_y = x + v_x, y + v_y, max(v_x - 1, 0), v_y - 1
 
 
-def get_trajectories():
+def get_trajectories() -> Iterable[List[Coordinate]]:
     for v_x in range(math.floor(math.sqrt(target_x_min * 2)), target_x_max + 1):
         for v_y in range(target_y_min, abs(target_y_min) + 1):
             trajectory = list(get_trajectory(0, 0, v_x, v_y))

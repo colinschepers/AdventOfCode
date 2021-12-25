@@ -5,7 +5,7 @@ from typing import Sequence
 from utils import get_input, Line
 
 
-def solve(vent_lines: Sequence[Line], allow_diagonal: bool = True):
+def solve(vent_lines: Sequence[Line], allow_diagonal: bool = True) -> int:
     vent_points = defaultdict(int)
     for (x1, y1), (x2, y2) in vent_lines:
         x_step = -1 if x1 > x2 else 1

@@ -10,11 +10,11 @@ re_double_digit = re.compile(r'\d{2,}')
 re_pair = re.compile(r'\[(\d+),(\d+)\]')
 
 
-def add(snail: str, other: str):
+def add(snail: str, other: str) -> str:
     return reduce(f"[{snail},{other}]")
 
 
-def reduce(snail: str):
+def reduce(snail: str) -> str:
     if idx := find_explode_idx(snail):
         return reduce(explode(snail, idx))
     if idx := find_split_idx(snail):

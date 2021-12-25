@@ -4,14 +4,14 @@ from collections import defaultdict
 from utils import get_input, Grid, manhattan
 
 
-def expand_grid(grid: Grid, count: int):
+def expand_grid(grid: Grid, count: int) -> Grid:
     new_grid = [[(x + i) % 9 + 1 for x in row] for i in range(-1, count - 1) for row in grid]
     for idx, row in enumerate(new_grid):
         new_grid[idx] += [(x + i) % 9 + 1 for i in range(count - 1) for x in row]
     return new_grid
 
 
-def a_star(grid: Grid):
+def a_star(grid: Grid) -> float:
     start = (0, 0)
     end = (len(grid) - 1, len(grid) - 1)
     open_set = {start}
