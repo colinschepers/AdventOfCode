@@ -31,7 +31,7 @@ optional arguments:
 
 ### Testing validity
 
-Using pytest in combination with its parametrize feature and unittest's mock module, each algorithm
+Using pytest in combination with its parametrize feature and unittest's mock library, each algorithm
 is given an example (as given on the website for the specific problem) and checks if the 
 expected output is returned. 
 
