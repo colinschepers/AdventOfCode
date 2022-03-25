@@ -5,7 +5,7 @@ from utils import get_solution, get_years, get_days
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-y', '--year', type=int)
-    parser.add_argument('-day', '--day', type=int)
+    parser.add_argument('-d', '--day', type=int)
     args = parser.parse_args()
 
     year = args.year or max(get_years())
