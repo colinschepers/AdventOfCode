@@ -31,11 +31,12 @@ optional arguments:
 
 ### Testing validity
 
-Using pytest in combination with its parametrize feature and unittest's mock module, each algorithm
+Using pytest in combination with its parametrize feature and unittest's mock library, each algorithm
 is given an example (as given on the website for the specific problem) and checks if the 
 expected output is returned. 
 
-<p><div style="text-align:center;"><iframe src="https://colinschepers.github.io/AdventOfCode/tests/results/test_examples.html" width="100%" height="400pt"></iframe></div></p>
+<a href="https://colinschepers.github.io/AdventOfCode/tests/results/test_examples.html"><img align="right" src="https://colinschepers.github.io/AdventOfCode/tests/results/test_examples.png" alt="" title="Test results" /></a>
+
 
 ### Measuring performance
 
@@ -43,4 +44,4 @@ With a similar testing framework as described in the previous section, each algo
 the actual inputs from the website and are checked whether they finish in a reasonable amount of time. On my private
 laptop with decent specifications all 50 algorithms finish in approximately half a minute. 
 
-<p><div style="text-align:center;"><iframe src="https://colinschepers.github.io/AdventOfCode/tests/results/test_running_times.html" width="100%" height="400pt"></iframe></div></p>
+<a href="https://colinschepers.github.io/AdventOfCode/tests/results/test_running_times.html"><img align="right" src="https://colinschepers.github.io/AdventOfCode/tests/results/test_running_times.png" alt="" title="Running time results" /></a>
