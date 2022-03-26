@@ -15,6 +15,8 @@ Follow the steps below to get started:
 2. Install dependencies: `pip install -r requirements.txt`
 3. Set the environment variable `SESSION_COOKIE` to the cookie from the website (after logging in).
 
+## Usage
+
 To execute an algorithm for a specific challenge, either run the corresponding file in the `challenges` 
 folder or run the script `run.py` in the root of the project:
 
