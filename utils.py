@@ -22,7 +22,7 @@ def get_input(year: int, day: int) -> Sequence[str]:
     response = session.get(
         url=f"https://adventofcode.com/{year}/day/{day}/input",
         cookies={"session": SESSION_COOKIE}
-    ).text.strip()
+    ).text.rstrip()
     return [line for line in response.split('\n')]
 
 
