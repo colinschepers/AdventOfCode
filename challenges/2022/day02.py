@@ -2,7 +2,7 @@ from utils import get_input
 
 
 def to_int(a: str) -> int:
-    return ord(a) % ord('A') + 1
+    return ord(a) % ord('X') % ord('A') + 1
 
 
 def score(a: int, b: int) -> int:
