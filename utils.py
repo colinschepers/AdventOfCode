@@ -22,8 +22,10 @@ def get_input(year: int, day: int) -> Sequence[str]:
     response = session.get(
         url=f"https://adventofcode.com/{year}/day/{day}/input",
         cookies={"session": SESSION_COOKIE}
-    ).text.rstrip()
-    return [line for line in response.split('\n')]
+    )
+    if response.status_code != 200:
+        raise Exception(response.text)
+    return [line for line in response.text.rstrip().split('\n')]
 
 
 def read_file(file_name: str) -> Sequence[str]:
