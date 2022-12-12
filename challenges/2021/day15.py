@@ -1,7 +1,8 @@
 import heapq
 from collections import defaultdict
+from typing import Iterable
 
-from utils import get_input, Grid, manhattan
+from utils import get_input, Grid, manhattan, Coordinate
 
 
 def expand_grid(grid: Grid, count: int) -> Grid:
@@ -9,6 +10,17 @@ def expand_grid(grid: Grid, count: int) -> Grid:
     for idx, row in enumerate(new_grid):
         new_grid[idx] += [(x + i) % 9 + 1 for i in range(count - 1) for x in row]
     return new_grid
+
+
+def get_neighbors(r: int, c: int) -> Iterable[Coordinate]:
+    if r < len(grid) - 1:
+        yield r + 1, c
+    if c < len(grid) - 1:
+        yield r, c + 1
+    if r > 0:
+        yield r - 1, c
+    if c > 0:
+        yield r, c - 1
 
 
 def a_star(grid: Grid) -> float:
@@ -19,16 +31,6 @@ def a_star(grid: Grid) -> float:
     g_scores = defaultdict(lambda: float('inf'), {start: 0})
     f_scores = defaultdict(lambda: float('inf'), {start: manhattan(start, end)})
 
-    def _get_neighbors_fast(r, c):
-        if r < len(grid) - 1:
-            yield r + 1, c
-        if c < len(grid) - 1:
-            yield r, c + 1
-        if r > 0:
-            yield r - 1, c
-        if c > 0:
-            yield r, c - 1
-
     while open_set:
         current = heapq.heappop(open_heap)[1]
         open_set.remove(current)
@@ -36,7 +38,7 @@ def a_star(grid: Grid) -> float:
         if current == end:
             return g_scores[end]
 
-        for neighbor in _get_neighbors_fast(*current):
+        for neighbor in get_neighbors(*current):
             g_score = g_scores[current] + grid[neighbor[0]][neighbor[1]]
             if g_score < g_scores[neighbor]:
                 g_scores[neighbor] = g_score

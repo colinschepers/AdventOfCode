@@ -5,7 +5,7 @@ from utils import get_input, split_lines, Coordinate
 BITS = tuple(1 << i for i in range(9))
 
 
-def get_neighbors(x, y) -> Iterable[Coordinate]:
+def get_neighbors(x: int, y: int) -> Iterable[Coordinate]:
     for dy in range(-1, 2):
         for dx in range(-1, 2):
             yield x - dx, y - dy
