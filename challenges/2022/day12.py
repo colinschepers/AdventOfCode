@@ -1,11 +1,10 @@
 import heapq
 from collections import defaultdict
-from datetime import datetime
 from typing import Iterable, Callable
 
 from more_itertools import first
 
-from utils import get_input, read_file, Coordinate, manhattan
+from utils import get_input, Coordinate
 
 
 def get_neighbors(r: int, c: int) -> Iterable[Coordinate]:
