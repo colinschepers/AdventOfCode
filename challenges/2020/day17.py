@@ -1,16 +1,14 @@
-from datetime import datetime
-from functools import lru_cache
 from typing import Set, Tuple, Sequence, Iterable
 
-from utils import get_input, read_file
+from utils import get_input
 
 
 def get_neighbors_1(x: int, y: int, z: int) -> Iterable[Tuple[int, int, int]]:
     for i in range(-1, 2):
         for j in range(-1, 2):
             for k in range(-1, 2):
-                if not(i == 0 and j == 0 and k == 0):
-                    yield x+i, y+j, z+k
+                if not (i == 0 and j == 0 and k == 0):
+                    yield x + i, y + j, z + k
 
 
 def get_neighbors_2(x: int, y: int, z: int, w: int) -> Iterable[Tuple[int, int, int, int]]:
@@ -18,8 +16,8 @@ def get_neighbors_2(x: int, y: int, z: int, w: int) -> Iterable[Tuple[int, int, 
         for j in range(-1, 2):
             for k in range(-1, 2):
                 for l in range(-1, 2):
-                    if not(i == 0 and j == 0 and k == 0 and l == 0):
-                        yield x+i, y+j, z+k, w+l
+                    if not (i == 0 and j == 0 and k == 0 and l == 0):
+                        yield x + i, y + j, z + k, w + l
 
 
 def get_bounds_1(active: Set[Tuple[int, int, int]]) -> Tuple[int, int, int, int, int, int]:
@@ -65,7 +63,7 @@ def run_cycles_2(data: Sequence[str], n: int):
                         coord = (x, y, z, w)
                         is_active = coord in old_active
                         cnt = sum((nx, ny, nz, nw) in old_active for nx, ny, nz, nw in get_neighbors_2(x, y, z, w))
-                        if is_active and not(2 <= cnt <= 3):
+                        if is_active and not (2 <= cnt <= 3):
                             active.remove(coord)
                         elif not is_active and cnt == 3:
                             active.add(coord)
