@@ -1,5 +1,5 @@
-from collections import deque, Iterable
-from typing import Tuple
+from collections import deque
+from typing import Tuple, Iterable
 
 from utils import get_input
 
