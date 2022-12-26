@@ -1,5 +1,7 @@
 from typing import Sequence
 
+from numba import jit
+
 from utils import get_input
 
 
@@ -9,6 +11,7 @@ def iterate(next_cup: Sequence[int], current: int = 1):
         current = next_cup[current]
 
 
+@jit
 def simulate(cups: Sequence[int], turns: int):
     cup_count = len(cups)
     next_cup = [0] * (cup_count + 1)
