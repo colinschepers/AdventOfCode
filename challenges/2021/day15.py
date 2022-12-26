@@ -12,10 +12,10 @@ def expand_grid(grid: Grid, count: int) -> Grid:
     return new_grid
 
 
-def get_neighbors(r: int, c: int) -> Iterable[Coordinate]:
+def get_neighbors(grid: Grid, r: int, c: int) -> Iterable[Coordinate]:
     if r < len(grid) - 1:
         yield r + 1, c
-    if c < len(grid) - 1:
+    if c < len(grid[r]) - 1:
         yield r, c + 1
     if r > 0:
         yield r - 1, c
@@ -38,7 +38,7 @@ def a_star(grid: Grid) -> float:
         if current == end:
             return g_scores[end]
 
-        for neighbor in get_neighbors(*current):
+        for neighbor in get_neighbors(grid, *current):
             g_score = g_scores[current] + grid[neighbor[0]][neighbor[1]]
             if g_score < g_scores[neighbor]:
                 g_scores[neighbor] = g_score
