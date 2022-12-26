@@ -1,3 +1,5 @@
 requests_cache
-pytest
 more_itertools
+numba
+numpy
+pytest
