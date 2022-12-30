@@ -3,7 +3,7 @@
 [Advent of Code](https://adventofcode.com/) is an advent calendar of small programming puzzles for a 
 variety of skill sets and skill levels that can be solved in any programming language. 
 
-This Python application contains algorithms to solve the challenges of Advent of Code 2020 and 2021. 
+This Python application contains algorithms to solve the challenges of Advent of Code 2020, 2021 and 2022. 
 Additionally, there are unit tests to test the validity of the solutions and the performance of 
 each algorithm. 
 
@@ -14,6 +14,8 @@ Follow the steps below to get started:
 1. Install python (>=3.8)
 2. Install dependencies: `pip install -r requirements.txt`
 3. Set the environment variable `SESSION_COOKIE` to the cookie from the website (after logging in).
+
+## Usage
 
 To execute an algorithm for a specific challenge, either run the corresponding file in the `challenges` 
 folder or run the script `run.py` in the root of the project:

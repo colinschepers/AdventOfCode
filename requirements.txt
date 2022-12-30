@@ -1,2 +1,5 @@
 requests_cache
+more_itertools
+numba
+numpy
 pytest

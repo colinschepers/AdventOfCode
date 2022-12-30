@@ -1,5 +1,4 @@
-from collections import Iterable
-from typing import Sequence
+from typing import Sequence, Iterable
 
 from utils import get_input, split_lines
 
