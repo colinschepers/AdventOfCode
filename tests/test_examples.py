@@ -5,7 +5,8 @@ import pytest
 
 from utils import get_solution, read_file
 
-examples = [(path.parent.parent.name, path.stem) for path in Path("tests/examples").glob("**/inputs/*.txt")]
+examples = [(path.parent.parent.name, path.stem) for path in Path("tests/examples").glob("**/inputs/*.txt")
+            if path.parent.parent.name <= '2021']
 
 
 @pytest.mark.parametrize("year, example", examples)

@@ -5,7 +5,8 @@ import pytest
 
 from utils import get_solution, get_input, get_years, get_days
 
-challenges = [(year, day) for year in get_years() for day in get_days(year)]
+challenges = [(year, day) for year in get_years() for day in get_days(year)
+              if year <= 2021]
 inputs = {(year, day): get_input(year, day) for year, day in challenges}
 
 
