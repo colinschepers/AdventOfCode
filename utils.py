@@ -33,9 +33,9 @@ def read_file(file_name: str) -> Sequence[str]:
         return [line for line in reader.read().split('\n')]
 
 
-def submit_answer(day: int, level: int, answer: int) -> str:
+def submit_answer(year: int, day: int, level: int, answer: int) -> str:
     return session.post(
-        url=f"https://adventofcode.com/2021/day/{day}/answer",
+        url=f"https://adventofcode.com/{year}/day/{day}/answer",
         cookies={"session": SESSION_COOKIE},
         data={"level": level, "answer": answer}
     ).text
