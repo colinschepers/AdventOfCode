@@ -1,5 +1,5 @@
-requests_cache
-more_itertools
-numba
-numpy
-pytest
+more_itertools~=10.1.0
+numpy~=1.26.2
+pytest~=7.4.3
+requests_cache~=1.1.1
+sympy~=1.12
