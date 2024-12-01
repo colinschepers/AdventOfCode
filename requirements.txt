@@ -1,6 +1,6 @@
 more_itertools~=10.1.0
 networkx~=3.2.1
-numba~=0.58.1
+numba~=0.60.0
 numpy~=1.26.2
 pytest~=7.4.3
 requests_cache~=1.1.1

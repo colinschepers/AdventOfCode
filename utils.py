@@ -14,6 +14,7 @@ Coordinate = Tuple[int, int]
 Line = Tuple[Coordinate, Coordinate]
 Grid = List[List[T]]
 
+ROOT = Path(__file__).parent
 SESSION_COOKIE = os.environ["SESSION_COOKIE"]
 session = requests_cache.CachedSession('cache')
 
@@ -26,6 +27,12 @@ def get_input(year: int, day: int) -> Sequence[str]:
     if response.status_code != 200:
         raise Exception(response.text)
     return [line for line in response.text.rstrip().split('\n')]
+
+
+def get_input_from_example(year: int, day: int, suffix: str = "") -> Sequence[str]:
+    suffix = f"-{suffix}" if suffix else suffix
+    path = ROOT / "tests" / "examples" / str(year) / "inputs" / f"{day:02}{suffix}.txt"
+    return read_file(str(path))
 
 
 def read_file(file_name: str) -> Sequence[str]:
@@ -58,7 +65,8 @@ def get_years() -> Sequence[int]:
 
 
 def get_days(year: int):
-    return [int(re.search(r'\d+', p.stem).group()) for p in Path(f"challenges/{year}").glob("day*.py")]
+    path = ROOT / "challenges" / str(year)
+    return [int(re.search(r'\d+', p.stem).group()) for p in path.glob("day*.py")]
 
 
 def split_lines(sequence: Sequence[str]) -> Sequence[Sequence[str]]:
