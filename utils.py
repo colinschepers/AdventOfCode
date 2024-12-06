@@ -3,7 +3,7 @@ import os
 import re
 from importlib import import_module, reload
 from io import StringIO
-from itertools import groupby
+from itertools import groupby, tee
 from pathlib import Path
 from typing import Iterable, Tuple, Callable, Sequence, TypeVar, List
 
@@ -94,3 +94,10 @@ def iter_grid(grid: Grid, condition: Callable[[T], bool] = None) \
 
 def manhattan(a: Tuple, b: Tuple):
     return sum(abs(x - y) for x, y in zip(a, b))
+
+
+def split_on_condition(
+    iterable: Iterable[T], condition: Callable[[T], bool]
+) -> Tuple[Iterable[T], Iterable[T]]:
+    left, right = tee((x, condition(x)) for x in iterable)
+    return (x for x, result in left if result), (x for x, result in right if not result)
