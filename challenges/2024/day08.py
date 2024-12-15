@@ -2,7 +2,7 @@ from collections import defaultdict
 from collections.abc import Iterable
 from itertools import combinations
 
-from utils import get_input_from_example, iter_grid, Grid, Coordinate
+from utils import get_input, iter_grid, Grid, Coordinate
 
 Antennas = dict[str, list[Coordinate]]
 
@@ -40,7 +40,7 @@ def get_antinodes(grid: Grid, antennas: Antennas, updated_model: bool) -> Iterab
             yield from get_antinodes_for(grid, b, a, updated_model)
 
 
-grid = [[char for char in line] for line in get_input_from_example(2024, 8)]
+grid = [[char for char in line] for line in get_input(2024, 8)]
 antennas = get_antennas(grid)
 
 print(len(set(get_antinodes(grid, antennas, updated_model=False))))

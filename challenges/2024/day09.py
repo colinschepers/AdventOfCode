@@ -1,7 +1,7 @@
 from collections.abc import Sequence
 from dataclasses import dataclass
 
-from utils import get_input_from_example
+from utils import get_input
 
 
 @dataclass
@@ -59,7 +59,7 @@ def checksum_2(disk_map: Sequence[int]) -> int:
     )
 
 
-disk_map = [int(char) for char in get_input_from_example(2024, 9)[0]]
+disk_map = [int(char) for char in get_input(2024, 9)[0]]
 
 print(checksum_1(disk_map))
 print(checksum_2(disk_map))
