@@ -1,3 +1,4 @@
+graphviz~=0.20.3
 more_itertools~=10.1.0
 networkx~=3.2.1
 numba~=0.60.0
