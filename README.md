@@ -3,7 +3,7 @@
 [Advent of Code](https://adventofcode.com/) is an advent calendar of small programming puzzles for a variety of skill
 sets and skill levels that can be solved in any programming language.
 
-This Python application contains algorithms to solve the challenges of Advent of Code 2020, 2021 and 2022. Additionally,
+This Python application contains algorithms to solve the challenges of Advent of Code 2020, 2021, 2022, 2023 and 2024. Additionally,
 there are unit tests to test the validity of the solutions and the performance of each algorithm.
 
 ## Getting Started
