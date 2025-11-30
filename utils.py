@@ -19,7 +19,7 @@ SESSION_COOKIE = os.environ["SESSION_COOKIE"]
 session = requests_cache.CachedSession('cache')
 
 
-def get_input(year: int, day: int) -> Sequence[str]:
+def _get_input_from_url(year: int, day: int) -> Sequence[str]:
     response = session.get(
         url=f"https://adventofcode.com/{year}/day/{day}/input",
         cookies={"session": SESSION_COOKIE}
@@ -29,10 +29,13 @@ def get_input(year: int, day: int) -> Sequence[str]:
     return [line for line in response.text.rstrip().split('\n')]
 
 
-def get_input_from_example(year: int, day: int, suffix: str = "") -> Sequence[str]:
-    suffix = f"-{suffix}" if suffix else suffix
-    path = ROOT / "tests" / "examples" / str(year) / "inputs" / f"{day:02}{suffix}.txt"
+def _get_input_from_file(year: int, day: int) -> Sequence[str]:
+    path = ROOT / "tests" / "examples" / str(year) / "inputs" / f"{day:02}.txt"
     return read_file(str(path))
+
+
+def get_input(year: int, day: int, from_file: bool = False) -> Sequence[str]:
+    return _get_input_from_file(year, day) if from_file else _get_input_from_url(year, day)
 
 
 def read_file(file_name: str) -> Sequence[str]:
