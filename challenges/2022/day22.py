@@ -1,11 +1,10 @@
 import re
-from datetime import datetime
 from functools import lru_cache
 from typing import Callable, Tuple
 
 from more_itertools import first
 
-from utils import get_input, read_file
+from utils import get_input
 
 directions = ((0, 1), (1, 0), (0, -1), (-1, 0))
 cube_mapping_input = {

@@ -1,5 +1,4 @@
 from collections import Counter
-from datetime import datetime
 from typing import Set, Tuple, Generator, Optional
 
 from utils import get_input, Coordinate

@@ -1,4 +1,3 @@
-import re
 
 from utils import get_input, split_lines
 

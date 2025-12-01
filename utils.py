@@ -3,7 +3,7 @@ import os
 import re
 from importlib import import_module, reload
 from io import StringIO
-from itertools import groupby
+from itertools import groupby, tee
 from pathlib import Path
 from typing import Iterable, Tuple, Callable, Sequence, TypeVar, List
 
@@ -14,11 +14,12 @@ Coordinate = Tuple[int, int]
 Line = Tuple[Coordinate, Coordinate]
 Grid = List[List[T]]
 
+ROOT = Path(__file__).parent
 SESSION_COOKIE = os.environ["SESSION_COOKIE"]
 session = requests_cache.CachedSession('cache')
 
 
-def get_input(year: int, day: int) -> Sequence[str]:
+def _get_input_from_url(year: int, day: int) -> Sequence[str]:
     response = session.get(
         url=f"https://adventofcode.com/{year}/day/{day}/input",
         cookies={"session": SESSION_COOKIE}
@@ -28,14 +29,23 @@ def get_input(year: int, day: int) -> Sequence[str]:
     return [line for line in response.text.rstrip().split('\n')]
 
 
+def _get_input_from_file(year: int, day: int) -> Sequence[str]:
+    path = ROOT / "tests" / "examples" / str(year) / "inputs" / f"{day:02}.txt"
+    return read_file(str(path))
+
+
+def get_input(year: int, day: int, from_file: bool = False) -> Sequence[str]:
+    return _get_input_from_file(year, day) if from_file else _get_input_from_url(year, day)
+
+
 def read_file(file_name: str) -> Sequence[str]:
     with open(file_name) as reader:
         return [line for line in reader.read().split('\n')]
 
 
-def submit_answer(day: int, level: int, answer: int) -> str:
+def submit_answer(year: int, day: int, level: int, answer: int) -> str:
     return session.post(
-        url=f"https://adventofcode.com/2021/day/{day}/answer",
+        url=f"https://adventofcode.com/{year}/day/{day}/answer",
         cookies={"session": SESSION_COOKIE},
         data={"level": level, "answer": answer}
     ).text
@@ -58,7 +68,8 @@ def get_years() -> Sequence[int]:
 
 
 def get_days(year: int):
-    return [int(re.search(r'\d+', p.stem).group()) for p in Path(f"challenges/{year}").glob("day*.py")]
+    path = ROOT / "challenges" / str(year)
+    return [int(re.search(r'\d+', p.stem).group()) for p in path.glob("day*.py")]
 
 
 def split_lines(sequence: Sequence[str]) -> Sequence[Sequence[str]]:
@@ -86,3 +97,10 @@ def iter_grid(grid: Grid, condition: Callable[[T], bool] = None) \
 
 def manhattan(a: Tuple, b: Tuple):
     return sum(abs(x - y) for x, y in zip(a, b))
+
+
+def split_on_condition(
+    iterable: Iterable[T], condition: Callable[[T], bool]
+) -> Tuple[Iterable[T], Iterable[T]]:
+    left, right = tee((x, condition(x)) for x in iterable)
+    return (x for x, result in left if result), (x for x, result in right if not result)
