@@ -35,7 +35,7 @@ optional arguments:
 Using pytest in combination with its parametrize feature and unittest's mock library, each algorithm is given an
 example (as given on the website for the specific problem) and checks if the expected output is returned.
 
-<a href="https://colinschepers.github.io/AdventOfCode/tests/results/test_examples_2022.html"><img align="right" src="https://colinschepers.github.io/AdventOfCode/tests/results/test_examples_2022.png" alt="" title="Test results" /></a>
+<a href="https://colinschepers.github.io/AdventOfCode/tests/results/test_examples_2024.html"><img align="right" src="https://colinschepers.github.io/AdventOfCode/tests/results/test_examples_2024.png" alt="" title="Test results" /></a>
 
 ### Measuring performance
 
@@ -43,4 +43,4 @@ With a similar testing framework as described in the previous section, each algo
 inputs from the website and are checked whether they finish in a reasonable amount of time. On my private laptop with
 decent specifications all challenges finish in approximately half a minute.
 
-<a href="https://colinschepers.github.io/AdventOfCode/tests/results/test_running_times_2022.html"><img align="right" src="https://colinschepers.github.io/AdventOfCode/tests/results/test_running_times_2022.png" alt="" title="Running time results" /></a>
+<a href="https://colinschepers.github.io/AdventOfCode/tests/results/test_running_times_2024.html"><img align="right" src="https://colinschepers.github.io/AdventOfCode/tests/results/test_running_times_2024.png" alt="" title="Running time results" /></a>
