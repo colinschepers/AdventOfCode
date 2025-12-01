@@ -1,5 +1,4 @@
 import re
-import time
 from typing import Sequence, Set
 
 from utils import get_input, Coordinate

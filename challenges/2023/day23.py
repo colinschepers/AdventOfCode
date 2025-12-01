@@ -1,5 +1,4 @@
 from collections import defaultdict
-from datetime import datetime
 from typing import Iterable, Sequence
 
 from utils import get_input, Coordinate
