@@ -7,3 +7,5 @@ venv/
 cache.sqlite
 binary_tree.png
 binary_tree
+
+**/.DS_Store
