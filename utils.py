@@ -5,7 +5,7 @@ from importlib import import_module, reload
 from io import StringIO
 from itertools import groupby, tee
 from pathlib import Path
-from typing import Iterable, Tuple, Callable, Sequence, TypeVar, List
+from typing import Any, Callable, Iterable, List, Sequence, Tuple, TypeVar
 
 import requests_cache
 
@@ -97,6 +97,10 @@ def iter_grid(grid: Grid, condition: Callable[[T], bool] = None) \
 
 def manhattan(a: Tuple, b: Tuple):
     return sum(abs(x - y) for x, y in zip(a, b))
+
+
+def argmax(data: Sequence[Any]) -> int:
+    return max(range(len(data)), key=lambda x: data[x])
 
 
 def split_on_condition(
