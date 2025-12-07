@@ -12,7 +12,7 @@ import requests_cache
 T = TypeVar('T')
 Coordinate = Tuple[int, int]
 Line = Tuple[Coordinate, Coordinate]
-Grid = List[List[T]]
+Grid = Sequence[Sequence[T]]
 
 ROOT = Path(__file__).parent
 SESSION_COOKIE = os.environ["SESSION_COOKIE"]
