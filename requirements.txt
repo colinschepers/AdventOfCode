@@ -5,4 +5,5 @@ numba~=0.60.0
 numpy~=1.26.2
 pytest~=7.4.3
 requests_cache~=1.1.1
+scipy~=1.16.3
 sympy~=1.12
