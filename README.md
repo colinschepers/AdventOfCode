@@ -36,6 +36,7 @@ Using pytest in combination with its parametrize feature and unittest's mock lib
 example (as given on the website for the specific problem) and checks if the expected output is returned.
 
 <a href="https://colinschepers.github.io/AdventOfCode/tests/results/test_examples_2024.html"><img align="right" src="https://colinschepers.github.io/AdventOfCode/tests/results/test_examples_2024.png" alt="" title="Test results" /></a>
+&nbsp;
 
 ### Measuring performance
 

@@ -11,7 +11,7 @@ inputs = {(year, day): get_input(year, day) for year, day in challenges}
 
 @pytest.mark.parametrize("year, day", challenges)
 def test_running_time(year: int, day: int):
-    with mock.patch('utils.get_input', lambda year, day: inputs[(year, day)]):
+    with mock.patch('utils.get_input', lambda year, day, *args, **kwargs: inputs[(year, day)]):
         start = datetime.now()
         solution = get_solution(year, day)
         elapsed = datetime.now() - start
